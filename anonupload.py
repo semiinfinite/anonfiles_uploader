@@ -35,7 +35,19 @@ def filePreviouslyUploaded(filePath, fileHash):
     #    return True
     #f.close()
     #return False
-    if fileHash in open(filePath).read():
+    for line in open(filePath):
+        if fileHash in line:
+            if linkAlive(line.split(',')[1]):
+                return True
+            else:
+                return False
+            return True
+    return False
+
+def linkAlive(link):
+    """Gets previously uploaded files and verifies that the link is still aliveself."""
+    r = requests.get(link)
+    if link in r.text:
         return True
     return False
 
