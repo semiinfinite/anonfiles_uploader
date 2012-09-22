@@ -89,4 +89,7 @@ def startProcess():
     oldFile.close()
 
 if __name__ == '__main__':
-    startProcess()
+    if len(sys.argv) > 1:
+        startProcess()
+    else:
+        print "Usage: python anonfiles.py dir_to_upload"
