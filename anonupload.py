@@ -3,7 +3,6 @@
 import requests
 import sys, os
 import hashlib
-import mmap
 
 def uploadFile(fileToUpload):
     """Function will upload files passed as paramter to anonfiles.com"""
@@ -28,13 +27,6 @@ def getmd5(filePath, block_size = 8192):
 
 def filePreviouslyUploaded(filePath, fileHash):
     """Checks if the file has been uploaded before"""
-    #f = open(filePath)
-    #s = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
-    #if fileHash in s:
-    #    f.close()
-    #    return True
-    #f.close()
-    #return False
     for line in open(filePath):
         if fileHash in line:
             if linkAlive(line.split(',')[1]):

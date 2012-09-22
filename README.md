@@ -2,6 +2,9 @@
 ## Overview ##
 File uploader that takes a directory as an argument, and uploads all zip files in the subdirectories to anonfiles.com
 
+## Prerequisites ##
+`pip install requests`
+
 ## Usage ##
 `python anonupload.py dir_to_upload`
 
