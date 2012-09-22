@@ -25,6 +25,16 @@ def getmd5(filePath, block_size = 8192):
         md5.update(data)
     return md5.hexdigest()
 
+def deleteBadLink(badLine):
+    """Deletes bad link from previousUploadedFiles.csv"""
+    lines = open('previouslyUploadedFiles.csv').readlines()
+    f = open('previouslyUploadedFiles.csv', 'w')
+    for line in lines:
+        if line != badLine:
+            f.write(line)
+    f.close()
+
+
 def filePreviouslyUploaded(filePath, fileHash):
     """Checks if the file has been uploaded before"""
     for line in open(filePath):
@@ -32,8 +42,9 @@ def filePreviouslyUploaded(filePath, fileHash):
             if linkAlive(line.split(',')[1]):
                 return True
             else:
+                deleteBadLink(line)
                 return False
-            return True
+        return True
     return False
 
 def linkAlive(link):
